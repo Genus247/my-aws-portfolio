@@ -2,15 +2,16 @@
 
 :root {
   color-scheme: light;
-  --ink: #17243b;
-  --muted: #64728a;
+  --ink: #142238;
+  --muted: #68778d;
   --blue: #1768e5;
   --blue-dark: #1054bd;
+  --orange: #ffad45;
   --mint: #b9f4dc;
-  --line: #e4eaf2;
-  --surface: #f5f8fc;
+  --line: #e2e8f0;
+  --surface: #f4f7fb;
   --white: #ffffff;
-  --shadow: 0 18px 48px rgb(23 36 59 / 9%);
+  --shadow: 0 18px 48px rgb(20 34 56 / 10%);
 }
 
 * {
@@ -27,6 +28,7 @@ body {
   color: var(--ink);
   font-family: "DM Sans", Arial, sans-serif;
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -107,11 +109,38 @@ a:focus-visible {
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
   min-height: 570px;
   grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
   align-items: center;
   gap: 72px;
+  overflow: hidden;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  padding: 72px clamp(32px, 6vw, 76px);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 86% 20%, rgb(35 83 145 / 34%), transparent 34%),
+    linear-gradient(125deg, #101c30 0%, #142844 100%);
+  color: var(--white);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: linear-gradient(rgb(255 255 255 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 3%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: "";
+  mask-image: linear-gradient(90deg, transparent, #000 72%);
+}
+
+.hero-content,
+.hero-card {
+  position: relative;
 }
 
 .eyebrow {
@@ -144,11 +173,23 @@ h3 {
   letter-spacing: -0.055em;
 }
 
+.hero .eyebrow {
+  color: var(--orange);
+}
+
+.hero h1 span {
+  color: var(--orange);
+}
+
 .hero-copy,
 .section-intro {
   max-width: 650px;
   color: var(--muted);
   font-size: 1.08rem;
+}
+
+.hero-copy {
+  color: #b9c5d6;
 }
 
 .hero-actions {
@@ -163,6 +204,7 @@ h3 {
   min-height: 48px;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   padding: 0 20px;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -198,11 +240,12 @@ h3 {
 .hero-card {
   position: relative;
   overflow: hidden;
-  padding: 36px;
-  border: 1px solid var(--line);
+  padding: 30px;
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 18px;
-  background: linear-gradient(145deg, #fff 20%, #edf5ff 100%);
-  box-shadow: var(--shadow);
+  background: linear-gradient(145deg, rgb(255 255 255 / 98%), #eaf2fc);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 20%);
+  color: var(--ink);
 }
 
 .hero-card::after {
@@ -212,20 +255,48 @@ h3 {
   width: 210px;
   height: 210px;
   border-radius: 50%;
-  background: rgb(185 244 220 / 50%);
+  background: rgb(255 173 69 / 25%);
   content: "";
+}
+
+.card-heading,
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .cloud-mark {
   display: grid;
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   place-items: center;
-  margin-bottom: 32px;
-  border-radius: 16px;
+  margin-bottom: 30px;
+  border-radius: 15px;
   background: var(--mint);
   color: #15583d;
   font-size: 2rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid #dfe7ef;
+  border-radius: 99px;
+  color: #526179;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.status-pill span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #35a878;
+  box-shadow: 0 0 0 3px rgb(53 168 120 / 14%);
 }
 
 .card-label,
@@ -235,11 +306,29 @@ h3 {
   font-size: 0.88rem;
 }
 
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
 .card-title {
   margin-bottom: 18px;
   font-family: "Manrope", sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
+}
+
+.card-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.card-decoration {
+  color: #8c9bb0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .progress-track {
@@ -264,6 +353,60 @@ h3 {
 
 .section-content {
   max-width: 800px;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+  align-items: center;
+  gap: 72px;
+}
+
+.about-note {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid #dce5ef;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fff, #edf3fa);
+}
+
+.about-note-mark {
+  display: block;
+  height: 38px;
+  color: var(--blue);
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.about-note-title {
+  margin: 15px 0 7px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.about-note-copy {
+  margin-bottom: 22px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.about-note-line {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin-bottom: 12px;
+  border-radius: 99px;
+  background: var(--orange);
+}
+
+.about-note-label {
+  color: #8090a5;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
 }
 
 h2 {
@@ -307,8 +450,15 @@ h2 {
 }
 
 .skill-card {
-  min-height: 220px;
+  min-height: 250px;
   padding: 24px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd9ec;
+  box-shadow: 0 14px 34px rgb(20 34 56 / 7%);
 }
 
 .skill-number,
@@ -331,6 +481,24 @@ h2 {
   font-size: 0.92rem;
 }
 
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-tags li {
+  padding: 4px 8px;
+  border-radius: 5px;
+  background: #f1f5fa;
+  color: #53647b;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -338,8 +506,20 @@ h2 {
 }
 
 .project-card {
+  position: relative;
+  overflow: hidden;
   padding: 28px;
   transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+.project-card::before {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 44px;
+  height: 3px;
+  background: var(--orange);
+  content: "";
 }
 
 .project-card:hover {
@@ -364,6 +544,23 @@ h2 {
   font-size: 1.3rem;
 }
 
+.project-details {
+  display: grid;
+  gap: 3px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  color: #526179;
+  font-size: 0.82rem;
+}
+
+.project-detail-label {
+  color: #8997aa;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
 .text-link {
   display: inline-block;
   margin-top: 22px;
@@ -378,12 +575,71 @@ h2 {
 }
 
 .contact-section {
-  max-width: 800px;
+  max-width: none;
+}
+
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(34px, 7vw, 72px);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 88% 18%, rgb(255 173 69 / 18%), transparent 24%),
+    linear-gradient(125deg, #101c30, #172b47);
+  color: var(--white);
   text-align: center;
 }
 
-.contact-section .section-intro {
+.contact-content {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  margin-inline: auto;
+}
+
+.contact-content .eyebrow {
+  color: var(--orange);
+}
+
+.contact-content h2 {
+  margin-inline: auto;
+}
+
+.contact-content .section-intro {
   margin: 0 auto 26px;
+  color: #b9c5d6;
+}
+
+.contact-content .button-primary {
+  background: var(--orange);
+  color: #17243b;
+}
+
+.contact-content .button-primary:hover {
+  background: #ffc16f;
+}
+
+.button-arrow {
+  font-size: 1.1rem;
+}
+
+.contact-orbit {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgb(255 255 255 / 9%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.contact-orbit-one {
+  top: -155px;
+  right: -56px;
+}
+
+.contact-orbit-two {
+  top: -115px;
+  right: -16px;
 }
 
 .site-footer {
@@ -407,6 +663,10 @@ h2 {
     grid-template-columns: 1fr 0.8fr;
     gap: 36px;
     padding-block: 76px;
+  }
+
+  .about-layout {
+    gap: 36px;
   }
 
   .skill-grid {
@@ -447,6 +707,11 @@ h2 {
     padding-block: 64px;
   }
 
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
   .hero h1 {
     font-size: clamp(2.6rem, 12vw, 3.8rem);
   }
@@ -472,6 +737,16 @@ h2 {
 
   .skill-card h3 {
     margin-top: 16px;
+  }
+
+  .contact-card {
+    padding-inline: 22px;
+  }
+
+  .contact-content .button {
+    max-width: 100%;
+    padding-inline: 14px;
+    font-size: 0.82rem;
   }
 }
 
