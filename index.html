@@ -6,6 +6,7 @@
   <meta name="description" content="The personal portfolio of Your Name, an aspiring AWS cloud engineer.">
   <title>Your Name | Aspiring AWS Cloud Engineer</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -118,12 +119,65 @@
 
     <section class="section container contact-section" id="contact">
       <p class="eyebrow">Let’s connect</p>
-      <h2>Have a question or an opportunity?</h2>
+      <h2 id="contact-heading">Have a question or an opportunity?</h2>
       <p class="section-intro">
         I’d be glad to connect with fellow learners and cloud professionals.
-        Replace the example address below with your email.
       </p>
-      <a class="button button-primary" href="mailto:your.email@example.com">your.email@example.com</a>
+      <form id="contact-form" class="contact-form" aria-labelledby="contact-heading">
+        <div class="form-field">
+          <label for="contact-name">Full name</label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            maxlength="100"
+            required
+          >
+        </div>
+        <div class="form-field">
+          <label for="contact-email">Email address</label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="254"
+            required
+          >
+        </div>
+        <div class="form-field form-field-full">
+          <label for="contact-subject">Subject</label>
+          <input
+            id="contact-subject"
+            name="subject"
+            type="text"
+            maxlength="120"
+            required
+          >
+        </div>
+        <div class="form-field form-field-full">
+          <label for="contact-message">Message</label>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="6"
+            minlength="10"
+            maxlength="2000"
+            required
+          ></textarea>
+        </div>
+        <p class="form-feedback" id="contact-form-feedback" role="status" aria-live="polite" aria-atomic="true">
+          Complete the form below to send me a message.
+        </p>
+        <button
+          class="button button-primary"
+          type="submit"
+          aria-describedby="contact-form-feedback"
+        >
+          Send Message
+        </button>
+      </form>
     </section>
   </main>
 
